@@ -1,11 +1,11 @@
 const canvas = document.querySelector("canvas");
-canvas.width = innerHeight;
-canvas.height = innerWidth;
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
 const WIDTH = canvas.width;
 const HEIGHT = canvas.height;
 
-const trigVolume = 0.5; // Define trigger volume (0 to 1)
+const trigVolume = 0.2; // Define trigger volume (0 to 1)
 let big = true;
 
 const debug = document.getElementById("debug");
@@ -89,7 +89,7 @@ function drawArray(dataArray) {
   console.log(color);
 
   big
-    ? (canvasCtx.lineWidth = 100 + Math.random() * 300)
+    ? (canvasCtx.lineWidth = 100 + Math.random() * 150)
     : (canvasCtx.lineWidth = Math.random() * 5);
 
   canvasCtx.strokeStyle = color;
@@ -120,15 +120,15 @@ function drawWave(dataArray, angle) {
   let x = 0;
   for (let i = 0; i < bufferLength; i++) {
     let v = dataArray[i] / 128.0;
-    let y = HEIGHT - (v * HEIGHT) / 2;
+    let y = v * HEIGHT/2;
 
     if (i === 0) {
       canvasCtx.moveTo(x, y);
     } else {
-      canvasCtx.lineTo(x, y * (i * (1 / bufferLength) * angle));
+      canvasCtx.lineTo(x, y);
     }
 
-    x += sliceWidth * 10;
+    x += sliceWidth;
   }
 
   canvasCtx.lineTo(WIDTH, HEIGHT / 2);
